@@ -11,7 +11,8 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 $film_id = $_GET['id'];
 
 // Fetch film details
-$stmt_film = $conn->prepare("SELECT id, title, description, release_year, poster_url FROM films WHERE id = ?");
+// UPDATED: Select id, title, description, release_year (removed poster_url)
+$stmt_film = $conn->prepare("SELECT id, title, description, release_year FROM films WHERE id = ?");
 $stmt_film->bind_param("i", $film_id);
 $stmt_film->execute();
 $result_film = $stmt_film->get_result();
@@ -105,7 +106,7 @@ $stmt_reviews->close();
     </nav>
     <div class="container">
         <div class="film-detail">
-            <img src="<?php echo htmlspecialchars($film['poster_url']); ?>" alt="<?php echo htmlspecialchars($film['title']); ?>">
+            <img src="get_image.php?id=<?php echo htmlspecialchars($film['id']); ?>" alt="<?php echo htmlspecialchars($film['title']); ?>">
             <div class="film-content">
                 <h2><?php echo htmlspecialchars($film['title']); ?> (<?php echo htmlspecialchars($film['release_year']); ?>)</h2>
                 <p><?php echo nl2br(htmlspecialchars($film['description'])); ?></p>

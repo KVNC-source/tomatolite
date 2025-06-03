@@ -21,6 +21,7 @@ function check_user() {
     }
 }
 
-check_user();
+// REMOVED: The unconditional check_user(); call from here.
+// This function should only be called manually where needed.
 
 ?>

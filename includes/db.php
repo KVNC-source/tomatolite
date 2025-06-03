@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root"; // Sesuaikan dengan username MySQL kamu
-$password = "";     // Sesuaikan dengan password MySQL kamu
+$password = "kenola20";     // Sesuaikan dengan password MySQL kamu
 $dbname = "tomatolite_db";
 
 // Buat koneksi

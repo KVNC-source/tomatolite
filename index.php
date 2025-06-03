@@ -36,14 +36,18 @@ include 'includes/db.php';
         <h2>Daftar Film</h2>
         <div class="film-grid">
             <?php
-            $sql = "SELECT id, title, description, release_year, poster_url FROM films ORDER BY release_year DESC";
+            // Corrected SQL: Only fetch necessary details, poster_url is no longer needed
+            $sql = "SELECT id, title, description, release_year FROM films ORDER BY release_year DESC";
+
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<div class='film-item'>";
-                    echo "<img src='" . htmlspecialchars($row['poster_url']) . "' alt='" . htmlspecialchars($row['title']) . "'>";
+                    // Corrected Image Source: Points to get_image.php
+                    echo "<img src='get_image.php?id=" . htmlspecialchars($row['id']) . "' alt='" . htmlspecialchars($row['title']) . "'>";
                     echo "<div class='film-info'>";
+                    echo "<h3>" . htmlspecialchars($row['title']) . " (" . htmlspecialchars($row['release_year']) . ")</h3>";
                     echo "<h3>" . htmlspecialchars($row['title']) . " (" . htmlspecialchars($row['release_year']) . ")</h3>";
                     echo "<p>" . nl2br(substr(htmlspecialchars($row['description']), 0, 150)) . "...</p>";
                     echo "<a href='film.php?id=" . $row['id'] . "' class='view-details'>Lihat Detail & Review</a>";
